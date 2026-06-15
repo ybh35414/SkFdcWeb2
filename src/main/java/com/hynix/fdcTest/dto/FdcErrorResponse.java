@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Builder
 public class FdcErrorResponse {
 	// ec 1.9	
+	// v1.21
 	private LocalDateTime timeStamp; // 에러발생식간
 	private int status; // HTTP 상태 코드
 	private String errorType; // 에러 종류

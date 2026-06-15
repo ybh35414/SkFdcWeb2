@@ -22,6 +22,7 @@ public class SensorController {
 	// vs 1.6
 	// ec 1.8
 	// ec 1.9
+	// ec 1.21
 	private final SensorService sensorService;
 	
 	@GetMapping("/valuelist/{txnOid}")
