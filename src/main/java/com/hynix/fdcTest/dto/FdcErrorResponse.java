@@ -11,6 +11,7 @@ public class FdcErrorResponse {
 	// ec 1.7	
 	
 	
+	
 	private LocalDateTime timeStamp; // 에러발생식간
 	private int status; // HTTP 상태 코드
 	private String errorType; // 에러 종류
