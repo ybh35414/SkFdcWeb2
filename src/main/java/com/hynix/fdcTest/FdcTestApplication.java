@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FdcTestApplication {
 
 	public static void main(String[] args) {
-		// com 1.1
+		// com 1.2
 		SpringApplication.run(FdcTestApplication.class, args);
 	}
 
