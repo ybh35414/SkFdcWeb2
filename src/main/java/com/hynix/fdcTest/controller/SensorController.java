@@ -14,6 +14,7 @@ import com.hynix.fdcTest.dto.*;
 public class SensorController {
 
 	// vs 1.1
+	// vs 1.2
 	private final SensorService sensorService;
 	
 	@GetMapping("/valuelist/{txnOid}")
