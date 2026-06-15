@@ -22,7 +22,8 @@ public class SensorService {
 	public List<SensorValueList1Dto> getSensorValueList(int txnOid) {
 		
 		if (txnOid < 0) {
-			throw new InvalidSvidFormatException("SVID [" + txnOid + "]가 0보다 작습니다. " + txnOid);
+			//throw new InvalidSvidFormatException("SVID [" + txnOid + "]가 0보다 작습니다. " + txnOid);
+			throw new InvalidSvidFormatException("SVID [" + txnOid + "]가 0보다 작아. " + txnOid);
 		}
 		
 		boolean hasRecipe = true;
