@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hynix.fdcTest.mapper.SensorMapper">
+
+	<!-- **************** AREA **************** -->
+
+	<!-- Area 목록 (설비수, 센서수 포함) -->
+	<resultMap id="SensorValueMap" type="com.hynix.fdcTest.dto.SensorValueList1Dto">
+		<result property="sensorId" column="SENSOR_ID" />
+		<result property="value" column="SENSOR_VALUE" />
+		<result property="timestamp" column="COLLECT_TIME" />
+		<result property="lotId" column="LOT_ID" />
+	</resultMap>
+
+	<select id="getSensorValueList" resultMap="SensorValueMap">
+		SELECT 
+		    S.SENSOR_ID
+		    , FS.SENSOR_VALUE
+		    , FS.COLLECT_TIME
+		    , L.LOT_ID 
+		  FROM FDC_SENSOR_RAW FS
+		  JOIN SENSOR_MST S ON FS.SENSOR_OID = S.SENSOR_OID 
+		  JOIN WORK_HISTORY W ON FS.TXN_OID = W.TXN_OID
+		  JOIN LOT_MST L  ON W.LOT_OID = L.LOT_OID
+		 WHERE W.TXN_OID = #{txnOid}
+	</select>
+   
+
+</mapper>
