@@ -27,5 +27,4 @@
 		 WHERE W.TXN_OID = #{txnOid}
 	</select>
    
-
 </mapper>

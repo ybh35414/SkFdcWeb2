@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hynix.fdcTest.mapper.DashBoardMapper">
+
+	<!-- 장비/챔버 목록 가져오기 -->
+	<resultMap id="EquipmentChamberMap" type="com.hynix.fdcTest.dto.EquipmentChamberDto">
+		<result property="eqpId" column="EQUIP_ID" />
+		<result property="chamberId" column="CHAMBER_NO" />
+		<result property="status" column="STATUS" />
+	</resultMap>
+
+	<select id="getEqpChamberList" resultMap="EquipmentChamberMap">
+		SELECT FE.EQUIP_ID 
+			   , FE.CHAMBER_NO 
+			   , FE.STATUS 
+		  FROM FDC_EQUIPMENT FE 
+		 ORDER BY FE.EQUIP_ID 
+	</select>
+	
+	<!-- 시간(초) 별 그룹데이터-->
+	<resultMap id="TraceGroupMap" type="com.hynix.fdcTest.dto.RealTimeTraceGroupDto">
+        
+        <!-- 그룹처리(하단 collection 처리)할 기준 데이터 > 초당 기준으로 데이터 그룹화 -->
+        <id property="timestamp" column="MEASURED_SEC"/>
+        
+        <result property="rawDataOid" column="GROUP_MAX_OID"/>
+        <result property="eqpId" column="EQUIP_ID"/>
+        <result property="currentRecipe" column="CURRENT_RECIPE"/>
+
+		<!-- 센서별 측정값과 해당레시피 및 rule 정보-->
+        <collection property="readings" ofType="com.hynix.fdcTest.dto.SvidReadingDto">
+            <result property="svid" column="SENSOR_ID"/>
+            <result property="svidName" column="SENSOR_NAME"/>
+            <result property="svalue" column="RAW_VALUE"/>
+            <result property="average" column="AVERAGE"/>
+            <result property="ucl" column="UCL"/>
+            <result property="lcl" column="LCL"/>
+        </collection>
+    </resultMap>	
+	
+    <select id="getDeltaTraceGroups" resultMap="TraceGroupMap">
+		SELECT 
+		    T.MEASURED_SEC,
+		    T.GROUP_MAX_OID,
+		    T.EQUIP_ID,
+		    T.CURRENT_RECIPE,
+		    T.SENSOR_ID,
+		    T.SENSOR_NAME,
+		    T.RAW_VALUE,
+		    T.AVERAGE,
+		    T.UCL,
+		    T.LCL
+		  FROM (  
+		    SELECT 
+		            TO_CHAR(FSD.MEASURED_AT, 'YYYY-MM-DD HH24:MI:SS') AS MEASURED_SEC, 
+		            MAX(FSD.DATA_ID) OVER (PARTITION BY TO_CHAR(FSD.MEASURED_AT, 'YYYY-MM-DD HH24:MI:SS')) AS GROUP_MAX_OID,
+		            DENSE_RANK() OVER (ORDER BY TO_CHAR(FSD.MEASURED_AT, 'YYYY-MM-DD HH24:MI:SS') DESC) AS TIME_RANK,
+		            FSD.EQUIP_ID,
+		            FL.RECIPE_ID AS CURRENT_RECIPE,       
+		            FSD.SENSOR_ID,
+		            FSM.SENSOR_NAME,
+		            FSD.RAW_VALUE,
+		            FFD.MEAN_VALUE AS AVERAGE,
+		            FR.UCL AS UCL,
+		            FR.LCL AS LCL,
+		            FSD.DATA_ID
+		      FROM FDC_SENSOR_DATA FSD         
+		      JOIN FDC_LOT FL ON FSD.LOT_ID = FL.LOT_ID 
+		      JOIN FDC_SENSOR_META FSM ON FSD.SENSOR_ID = FSM.SENSOR_ID
+		      LEFT JOIN FDC_FEATURE_DATA FFD ON FSD.EQUIP_ID = FFD.EQUIP_ID 
+		                                     AND FSD.LOT_ID = FFD.LOT_ID 
+		                                     AND FSD.SENSOR_ID = FFD.SENSOR_ID
+		      LEFT JOIN FDC_RULE FR ON FL.RECIPE_ID = FR.RECIPE_ID 
+		                            AND FSD.SENSOR_ID = FR.SENSOR_ID 
+		                            AND FR.RULE_TYPE = 'SPC'  
+		      WHERE FSD.EQUIP_ID = #{equipId}    
+		        AND FSD.DATA_ID > #{lastOid}
+		      ORDER BY FSD.DATA_ID ASC
+		  ) T
+		<where>
+        	<if test="lastOid == 0">
+                T.TIME_RANK &lt;= 100
+            </if>
+        </where>
+		 ORDER BY T.DATA_ID ASC		    	
+    	
+    </select>
+
+</mapper>

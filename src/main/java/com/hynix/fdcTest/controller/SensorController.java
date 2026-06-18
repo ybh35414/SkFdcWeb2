@@ -13,16 +13,6 @@ import com.hynix.fdcTest.dto.*;
 @RequiredArgsConstructor
 public class SensorController {
 
-	// vs 1.1
-	// vs 1.2
-	// vs 1.3
-	// ec 1.4
-	// ec 1.5
-	// vs 1.5
-	// vs 1.6
-	// ec 1.8
-	// ec 1.9
-	// ec 1.21
 	private final SensorService sensorService;
 	
 	@GetMapping("/valuelist/{txnOid}")
