@@ -1,0 +1,12 @@
+2026-06-19T11:27:57.076+09:00  INFO 15804 --- [fdcTest] [main] com.hynix.fdcTest.FdcTestApplication     : Starting FdcTestApplication using Java 17.0.18 with PID 15804 (C:\Users\hee\Documents\workspace-spring-tools-for-eclipse-5.1.1.RELEASE\fdcTest.zip_expanded\fdcTest\target\classes started by hee in C:\Users\hee\Documents\workspace-spring-tools-for-eclipse-5.1.1.RELEASE\fdcTest.zip_expanded\fdcTest)
+2026-06-19T11:27:57.084+09:00  INFO 15804 --- [fdcTest] [main] com.hynix.fdcTest.FdcTestApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-06-19T11:27:58.403+09:00  INFO 15804 --- [fdcTest] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-06-19T11:27:58.421+09:00  INFO 15804 --- [fdcTest] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-19T11:27:58.422+09:00  INFO 15804 --- [fdcTest] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.54]
+2026-06-19T11:27:58.487+09:00  INFO 15804 --- [fdcTest] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-06-19T11:27:58.488+09:00  INFO 15804 --- [fdcTest] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1334 ms
+2026-06-19T11:27:59.380+09:00  INFO 15804 --- [fdcTest] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-06-19T11:27:59.392+09:00  INFO 15804 --- [fdcTest] [main] com.hynix.fdcTest.FdcTestApplication     : Started FdcTestApplication in 2.959 seconds (process running for 4.201)
+2026-06-19T11:28:12.118+09:00  INFO 15804 --- [fdcTest] [RMI TCP Connection(7)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2026-06-19T11:28:12.121+09:00  INFO 15804 --- [fdcTest] [RMI TCP Connection(7)-127.0.0.1] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-19T11:28:12.394+09:00  INFO 15804 --- [fdcTest] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete

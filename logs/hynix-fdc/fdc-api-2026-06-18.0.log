@@ -1,0 +1,5 @@
+2026-06-18T01:36:38.184+09:00  INFO 1388 --- [fdcTest] [RMI TCP Connection(201)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2026-06-18T01:36:38.375+09:00  INFO 1388 --- [fdcTest] [RMI TCP Connection(201)-127.0.0.1] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-18T01:36:39.007+09:00  INFO 1388 --- [fdcTest] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-06-18T01:36:39.052+09:00  INFO 1388 --- [fdcTest] [RMI TCP Connection(201)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-06-18T01:36:39.091+09:00  INFO 1388 --- [fdcTest] [RMI TCP Connection(201)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
